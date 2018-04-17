@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style type="text/css">
+	body,div,p{
+		margin: 0px;
+		padding: 0px;
+	}
+	div{
+		width: 300px;
+		height: 150px;
+		float: left;
+		margin-right: 50px;
+		padding: 5px;
+		border: 1px solid #aaaaaa;
+	}
+</style>
+<body>
+	<div id="div1" ondragover="allowDrop(event)" ondrop="drop(event)">
+		<p id="p1" draggable="true" ondragstart="drag(event)">被拖拽对象1</p>
+		<p id="p2" draggable="true" ondragstart="drag(event)">被拖拽对象2</p>
+	</div>
+	<div id = "div2" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+	<div id = "div3" ondragover="allowDrop(event)" ondrop="remove(event)"></div>
+</body>
+<script type="text/javascript">
+	function drag(event){
+		event.dataTransfer.setData("Text",event.target.id);
+	}
+	function drop(event){
+		event.preventDefault();
+		var data = event.dataTransfer.getData("Text");
+		event.target.appendChild(document.getElementById(data));
+	}
+	function allowDrop(event){
+		event.preventDefault();
+	} 	
+	function remove(event){
+		event.preventDefault();
+		var data = event.dataTransfer.getData("Text");
+		event.target.appendChild(document.getElementById(data));
+		event.target.removeChild(document.getElementById(data));
+	}
+</script>
+</html>
